@@ -1,0 +1,78 @@
+/*
+Theme Name: Umbrella Fish Base Template
+Theme URI: 
+Description: Parent theme for Umbrella Fish Development
+Author: Umbrella Fish LLC
+Author URI: http://umbrella-fish.com/
+Version: 1.1
+GitHub Theme URI: jameswburke/ufbase
+GitHub Theme URI: https://github.com/jameswburke/ufbase
+*/
+
+
+.margin-top-none{ margin-top: 0px; }
+.margin-top-xs{ margin-top: 10px; }
+.margin-top-sm{ margin-top: 20px; }
+.margin-top{    margin-top: 30px; }
+.margin-top-lg{ margin-top: 40px; }
+.margin-top-xl{ margin-top: 50px; }
+.margin-top-xxl{    margin-top: 60px; }
+
+.margin-bottom-none{ margin-bottom: 0px; }
+.margin-bottom-xs{  margin-bottom: 10px; }
+.margin-bottom-sm{  margin-bottom: 20px; }
+.margin-bottom{ margin-bottom: 30px; }
+.margin-bottom-lg{  margin-bottom: 40px; }
+.margin-bottom-xl{  margin-bottom: 50px; }
+.margin-bottom-xxl{ margin-bottom: 60px; }
+
+.margin-auto{ margin: auto;}
+
+
+    /* Custom, iPhone Retina */ 
+    @media only screen and (max-width : 320px) { .center-on-collapse-xs{ float: none !important; text-align: center; margin: auto; display: block; } }
+    /* Extra Small Devices, Phones */ 
+    @media only screen and (max-width : 480px) { .center-on-collapse-sm{ float: none !important; text-align: center; margin: auto; display: block; } }
+    /* Small Devices, Tablets */
+    @media only screen and (max-width : 768px) { .center-on-collapse-md{ float: none !important; text-align: center; margin: auto; display: block; } }
+    /* Medium Devices, Desktops */
+    @media only screen and (max-width : 992px) { .center-on-collapse-lg{ float: none !important; text-align: center; margin: auto; display: block; } }
+    /* Large Devices, Wide Screens */
+    @media only screen and (max-width : 1200px) { .center-on-collapse-xl{ float: none !important; text-align: center; margin: auto; display: block; } }
+
+/* WordPress Styles */
+.alignnone{margin:5px 20px 20px 0}
+.aligncenter,div.aligncenter{display:block;margin:5px auto}
+.alignright{float:right;margin:5px 0 20px 20px}
+.alignleft{float:left;margin:5px 20px 20px 0}
+.aligncenter{display:block;margin:5px auto}
+a img.alignright{float:right;margin:5px 0 20px 20px}
+a img.alignnone{margin:5px 20px 20px 0}
+a img.alignleft{float:left;margin:5px 20px 20px 0}
+a img.aligncenter{display:block;margin-left:auto;margin-right:auto}
+.wp-caption{background:#fff;border:1px solid #f0f0f0;max-width:96%;padding:5px 3px 10px;text-align:center}
+.wp-caption.alignleft,.wp-caption.alignnone{margin:5px 20px 20px 0}
+.wp-caption.alignright{margin:5px 0 20px 20px}
+.wp-caption img{border:0;height:auto;margin:0;max-width:98.5%;padding:0;width:auto}
+.wp-caption p.wp-caption-text{font-size:11px;line-height:17px;margin:0;padding:0 4px 5px}
+@media (max-width:767px){.pull-left-xs{float:left}.pull-right-xs{float:right}}
+@media (min-width:768px){.pull-left-sm{float:left}.pull-right-sm{float:right}}
+@media (min-width:992px){.pull-left-md{float:left}.pull-right-md{float:right}}
+@media (min-width:1200px){.pull-left-lg{float:left}.pull-right-lg{float:right}}
+
+/* Responsive Video */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px; height: 0; overflow: hidden;
+}
+ 
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
