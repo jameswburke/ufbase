@@ -1,16 +1,16 @@
 <?php get_header(); ?>
-<div id="content-container" class="container">
+<div class="container">
 	<div class="row">
-		<div id="content" class="col-md-9">
+		<div id="content" class="col-md-8">
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-				<h1><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+				<h1 class="margin-top-none"><?php echo the_title(); ?></h1>
 				<?php echo the_content(); ?>
 			<?php endwhile; endif; ?>
 		</div>
 		
-		<div class="col-md-3" id="page-sidebar">
+		<div class="col-md-4">
 			<?php dynamic_sidebar('main-sidebar'); ?>
 		</div>
-	</div>
-</div><!-- Content -->
+	</div>	
+</div>
 <?php get_footer(); ?>

@@ -14,7 +14,7 @@
 	}
 ?>
 
-<form class="form-search" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
-	<input type="text" value="<?php echo $search_query['s']; ?>" name="s" id="s" class="input-medium search-query" placeholder="Search"/>
+<form class="form-search margin-bottom" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
+	<input type="text" value="<?php if(isset($search_query['s'])){ echo $search_query['s']; } ?>" name="s" id="s" class="input-medium search-query" placeholder="Search"/>
 	<input type="submit" id="searchsubmit" value="Search" class="btn" />
 </form>

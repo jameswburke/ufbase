@@ -4,7 +4,7 @@ Theme URI:
 Description: Parent theme for Umbrella Fish Development
 Author: Umbrella Fish LLC
 Author URI: http://umbrella-fish.com/
-Version: 1.1
+Version: 1.2.0
 GitHub Theme URI: jameswburke/ufbase
 GitHub Theme URI: https://github.com/jameswburke/ufbase
 */
@@ -39,6 +39,14 @@ GitHub Theme URI: https://github.com/jameswburke/ufbase
     @media only screen and (max-width : 992px) { .center-on-collapse-lg{ float: none !important; text-align: center; margin: auto; display: block; } }
     /* Large Devices, Wide Screens */
     @media only screen and (max-width : 1200px) { .center-on-collapse-xl{ float: none !important; text-align: center; margin: auto; display: block; } }
+
+
+/* Prevent oversized images */
+#content img{
+    max-width: 100%;
+    height: auto;
+}
+
 
 /* WordPress Styles */
 .alignnone{margin:5px 20px 20px 0}

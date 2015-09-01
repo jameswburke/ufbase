@@ -33,7 +33,7 @@
 			?>
 				<p>
 					<label for="<?php echo $this->get_field_id($value); ?>"><?php _e( $key.':' ); ?>
-						<input class="widefat" id="<?php echo $this->get_field_id($value); ?>" name="<?php echo $this->get_field_name($value); ?>" type="text" value="<?php echo esc_attr($instance[$value]); ?>" />
+						<input class="widefat" id="<?php echo $this->get_field_id($value); ?>" name="<?php echo $this->get_field_name($value); ?>" type="text" value="<?php if(isset($instance[$value])){ echo esc_attr($instance[$value]); } ?>" />
 					</label>
 				</p>
 			<?php 

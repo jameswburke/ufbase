@@ -61,7 +61,6 @@ add_action('wp_enqueue_scripts', 'uf_gallery_scripts');
 
 //Access options page metadata for sliders (NOT USING ACF FRONT END)
 $sizes = get_option( 'uf_gallery_image_sizes' );
-	echo 'test';
 if($sizes){
 	for( $i = 0; $i < $sizes; $i++){
 		//Slider size

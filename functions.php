@@ -1,4 +1,26 @@
 <?php
+	
+	//Default Settings for UF Widgets and Plugins
+	if(!isset($ufSettings)){
+		$ufSettings = array(
+			'social-media' => true,
+			'slider' => true,
+			'gallery' => true,
+			'sidebars' => array(
+				'main' => true,
+				'footer' => true,
+				'social-media' => true
+			)
+		);
+	}
+	//If individual settings are missing
+	if(!isset($ufSettings['social-media'])){ $ufSettings['social-media'] = true; }
+	if(!isset($ufSettings['slider'])){ $ufSettings['slider'] = true; }
+	if(!isset($ufSettings['gallery'])){ $ufSettings['gallery'] = true; }
+	if(!isset($ufSettings['sidebars'])){ $ufSettings['sidebars'] = array(); }
+	if(!isset($ufSettings['sidebars']['main'])){ $ufSettings['sidebars']['main'] = true; }
+	if(!isset($ufSettings['sidebars']['footer'])){ $ufSettings['sidebars']['footer'] = true; }
+	if(!isset($ufSettings['sidebars']['social-media'])){ $ufSettings['sidebars']['social-media'] = true; }
 
 	//Advanced Custom Fields
 	require_once('theme-extras/advanced-custom-fields-pro/acf.php');	
@@ -32,6 +54,44 @@
 	if($ufSettings['slider']){ require_once('theme-extras/widgets/uf-slider.php'); }
 	if($ufSettings['gallery']){ require_once('theme-extras/widgets/uf-gallery/uf-gallery.php'); }
 
+	//Main Widgets
+		if($ufSettings['sidebars']['main']){
+			$main = array(
+				'name'=>'Main Sidebar',
+				'id'=>'main-sidebar',
+				'class' => 'sidebar',
+				'before_widget' => '<div class="main-sidebar">',
+				'after_widget' => '</div>',
+				'before_title' => '<h4 class="margin-top-none">',
+				'after_title' => '</h4>',
+			);
+			register_sidebar($main);
+		}
+	//Footer Widgets
+		if($ufSettings['sidebars']['footer']){
+			$footer = array(
+				'name' => 'Footer',
+				'id' => 'footer-sidebar',
+				'before_widget' => '<div class="col-sm-3 footer-sidebar">',
+				'after_widget' => '</div>',
+				'before_title' => '<h4>',
+				'after_title' => '</h4>',
+			);
+			register_sidebar($footer);
+		}
+	//Social Media Widgets
+		if($ufSettings['sidebars']['social-media']){
+			$social_footer = array(
+				'name' => 'Social Media',
+				'id' => 'social-media-sidebar',
+				'before_widget' => '<div class="social-media-sidebar">',
+				'after_widget' => '</div>',
+				'before_title' => '',
+				'after_title' => '',
+			);
+			register_sidebar($social_footer);
+		}
+
 
 	//Theme Support
 	add_theme_support( 'post-thumbnails' );
@@ -40,9 +100,21 @@
 
 	//Custom Image Size Support
 	//True means it will crop to size, false will scale
-	add_image_size('big-thumb', 340, 160, true);
-	add_image_size('medium-thumb', 245, 100, true);
-	add_image_size('square-thumb', 100, 100, true);
+		
+		//4x3 Ratio
+			add_image_size('4x3', 720, 540, true);		// Full Size
+			add_image_size('4x3-md', 480, 360, true);	// 2/3rds of Full Size
+			add_image_size('4x3-sm', 240, 180, true);	// 1/3rds of Full Size
+
+		//16x9 Ratio
+			add_image_size('16x9', 720, 405, true);		// Full Size
+			add_image_size('16x9-md', 480, 270, true);	// 2/3rds of Full Size
+			add_image_size('16x9-sm', 240, 135, true);	// 1/3rds of Full Size
+
+		//1x1 Ratio
+			add_image_size('1x1', 720, 720, true);		// Full Size
+			add_image_size('1x1-md', 480, 480, true);	// 2/3rds of Full Size
+			add_image_size('1x1-sm', 240, 240, true);	// 1/3rds of Full Size
 
 
 	//Menu Support
@@ -84,19 +156,6 @@
 	add_action('wp_enqueue_scripts', 'my_scripts');
 
 
-	function admin_bar_css(){
-		if ( is_admin_bar_showing() ) {
-			echo "
-			<style>
-				header{
-					margin-top: 28px;
-				}
-			</style>";
-		}
-	}
-	add_action('wp_head', 'admin_bar_css');
-
-
 	//Excerpt Stuff
 	function custom_excerpt_length( $length ) {	return 40; }
 	add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
@@ -109,7 +168,15 @@
 		if ((function_exists('has_post_thumbnail')) && (has_post_thumbnail())) {
 			the_post_thumbnail($size, $attr);
 		} else {
-			echo '<img src="'.get_stylesheet_directory_uri().'/assets/img/default_featured/'.$size.'.jpg" class="img-responsive" />';
+			$attribute_string = '';
+			foreach($attr as $key => $value){
+				$attribute_string .= $key.'='.'"'.$value.'"';
+			}
+			if(file_exists(get_stylesheet_directory_uri().'/assets/img/default_featured/'.$size.'.jpg')){
+				echo '<img src="'.get_stylesheet_directory_uri().'/assets/img/default_featured/'.$size.'.jpg" '.$attribute_string.' />';
+			}else{
+				echo '<img src="'.get_template_directory_uri().'/assets/img/default_featured/'.$size.'.jpg" '.$attribute_string.' />';	
+			}
 		}
 	}
 
