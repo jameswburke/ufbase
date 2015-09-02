@@ -44,13 +44,22 @@ if( function_exists('acf_add_options_sub_page') ) {
 
 //Enqueue Scripts
 function uf_gallery_scripts() {
-	//CSS
+	//Lightbox CSS
 	wp_enqueue_style('ufgallery-ekko-lightbox-css', get_template_directory_uri().'/theme-extras/widgets/uf-gallery/assets/ekko-lightbox.min.css');
 
-	//Bootstrap
+	//Lightbox JS
 	wp_enqueue_script(
 		'ufgallery-ekko-lightbox-js',
 		get_template_directory_uri() . '/theme-extras/widgets/uf-gallery/assets/ekko-lightbox.min.js',
+		array('jquery'),
+		false,
+		true
+	);
+
+	//Script
+	wp_enqueue_script(
+		'ufgallery-ekko-lightbox-script-js',
+		get_template_directory_uri() . '/theme-extras/widgets/uf-gallery/assets/script.js',
 		array('jquery'),
 		false,
 		true
@@ -92,21 +101,50 @@ function wptuts_register_buttons( $buttons ) {
 function uf_gallery_output($gallerySlug = ''){
 	$output = '';
 
-	$galleryPost = get_page_by_path($gallerySlug,OBJECT,'uf_gallery');
+	$galleryPost = get_page_by_path($gallerySlug, OBJECT, 'uf_gallery');
+
+	//Valid Gallery
 	if($galleryPost){
-		// echo ;
-		$galleryImages = get_post_meta( $galleryPost->ID, 'uf_gallery_images', true );
+		//Raw list of IDs
+		$galleryImagesRaw = get_post_meta( $galleryPost->ID, 'uf_gallery_images', true );
+		//How many columns we need to display in
 		$galleryNumberOfColumns = get_post_meta( $galleryPost->ID, 'uf_gallery_number_of_columns', true );
+		//Fullsize image size used
 		$galleryFullSize = get_post_meta( $galleryPost->ID, 'uf_gallery_full_size_image_slug', true );
+		//Thumbnail image size used
 		$galleryThumbnailSize = get_post_meta( $galleryPost->ID, 'uf_gallery_thumbnail_image_slug', true );
 
-		echo print_r($galleryFullSize);
-		// echo 'a';
-		// echo print_r($galleryImages);
-		foreach($galleryImages as $image){
-			// echo wp_get_attachment_image( $image );
-
+		switch($galleryNumberOfColumns){
+			case 2: $columnSize = 6; break;
+			case 3: $columnSize = 4; break;
+			case 4: $columnSize = 3; break;
+			case 6: $columnSize = 2; break;
+			default: $columnSize = 3; break;
 		}
+
+		$output .= '<div class="row">';
+
+			//Loop through raw IDs and pull out correct images + caption
+			$count = 1;
+			foreach($galleryImagesRaw as $image_id){
+				$fullsize = wp_get_attachment_image_src($image_id, $galleryFullSize); $fullsize = $fullsize[0];
+				$thumbnail = wp_get_attachment_image_src($image_id, $galleryThumbnailSize); $thumbnail = $thumbnail[0];
+				$caption = get_post($image_id);
+
+				// echo $columnSize;
+				$output .= "<div class='col-md-$columnSize margin-bottom'>";
+					$output .= "<a href='$fullsize' data-toggle='lightbox' data-title='$caption->post_excerpt' data-gallery='uf-gallery-$gallerySlug'>";
+					$output .= "<img src='$thumbnail' class='img-responsive margin-auto'>";
+					$output .= "</a>";
+				$output .= "</div>";
+				if($count % $galleryNumberOfColumns == 0){
+					$output .= "</div>";
+					$output .= '<div class="row">';
+				}
+				$count++;
+			}
+		$output .= '</div>';
+
 	}else{
 		$output .= 'No gallery found';
 	}
