@@ -131,10 +131,6 @@ class acf_field_image_sizes extends acf_field {
 		*  Review the data of $field.
 		*  This will show what data is available
 		*/
-		
-		echo '<pre>';
-			print_r( $field );
-		echo '</pre>';
 
 		/*
 		*  Create a simple text input using the 'font_size' setting.
@@ -142,9 +138,10 @@ class acf_field_image_sizes extends acf_field {
 		
 		?>
 		<!-- <input type="text" name="<?php echo esc_attr($field['name']) ?>" value="<?php echo esc_attr($field['value']) ?>" style="font-size:<?php echo $field['font_size'] ?>px;" /> -->
-		<select name="test" id="test">
+		<?php echo esc_attr($field['value']) ?>
+		<select name="<?php echo esc_attr($field['name']) ?>">
 			<?php foreach($_wp_additional_image_sizes as $key => $value): ?>
-				<option value="<?php echo $key; ?>"><?php echo $key.": ".$value['width']." x ".$value['height'];  ?></option>
+				<option value="<?php echo $key; ?>" <?php if($key === esc_attr($field['value'])){ echo 'selected'; } ?>><?php echo $key.": ".$value['width']." x ".$value['height']; ?></option>
 			<?php endforeach; ?>
 		</select>
 		<?php

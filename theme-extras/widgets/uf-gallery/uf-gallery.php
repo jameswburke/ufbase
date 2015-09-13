@@ -68,6 +68,9 @@ function uf_gallery_scripts() {
 add_action('wp_enqueue_scripts', 'uf_gallery_scripts');
 
 
+add_image_size('uf_gallery_800_width', 800, 99999);
+
+
 //Access options page metadata for sliders (NOT USING ACF FRONT END)
 $sizes = get_option( 'uf_gallery_image_sizes' );
 if($sizes){
@@ -153,72 +156,6 @@ function uf_gallery_output($gallerySlug = ''){
 	// $output .= 'function uf_gallery_output - uf-gallery.php line 94';
 	return $output;
 }
-
-// function uf_slider_output($sliderSlug = 'default'){
-// 	$output = '';
-
-// 	if( have_rows('sliders', 'options') ):
-// 		while( have_rows('sliders', 'options') ): the_row();
-
-// 			$currentSlider = get_sub_field('slider_slug', 'options');
-
-// 			if(get_sub_field('slider_slug', 'options') == $sliderSlug):
-
-// 				while( have_rows('slides', 'options') ): the_row();
-// 					// echo get_sub_field('caption', 'options');
-
-// 				endwhile;
-
-// 				$activeClass = 'active';
-// 				$sliderCount = 0;
-// 				$output .= '<div id="uf-slider-'.$sliderSlug.'" class="carousel slide round" data-ride="carousel">';
-// 					$output .= '<ol class="carousel-indicators">';
-// 					while( have_rows('slides', 'options') ): the_row();
-// 						// echo get_sub_field('caption', 'options');
-// 						$output .= '<li data-target="#uf-slider-'.$sliderSlug.'" data-slide-to="'.$sliderCount.'" class="'.$activeClass.'"></li>';
-// 						$activeClass = '';
-// 						$sliderCount++;
-// 					endwhile;
-// 					$output .= '</ol>';
-
-
-// 					$activeClass = 'active';
-// 					$output .= '<div class="carousel-inner round" role="listbox">';
-// 					while( have_rows('slides', 'options') ): the_row();
-// 						$output .= '<div class="item round '.$activeClass.'">';
-// 							$output .= '<img src="'.acf_image_slider(get_sub_field('image', 'options'), $sliderSlug).'" class="round">';
-// 							// $output .= print_r(get_sub_field('image', 'options'));
-// 							$output .= '<div class="carousel-caption">';
-// 								$output .= get_sub_field('caption', 'options');
-// 							$output .= '</div>';
-// 						$output .= '</div>';
-// 						$activeClass = '';
-// 					endwhile;
-// 					$output .= '</div>';
-
-
-// 					$output .= '<!-- Controls -->';
-// 					$output .= '<a class="left carousel-control" href="#uf-slider-'.$sliderSlug.'" role="button" data-slide="prev">';
-// 					$output .= '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>';
-// 					$output .= '<span class="sr-only">Previous</span>';
-// 					$output .= '</a>';
-
-// 					$output .= '<a class="right carousel-control" href="#uf-slider-'.$sliderSlug.'" role="button" data-slide="next">';
-// 					$output .= '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>';
-// 					$output .= '<span class="sr-only">Next</span>';
-// 					$output .= '</a>';
-
-// 				$output .= '</div>';
-
-// 			endif;
-// 		endwhile;
-// 	endif;
-
-// 	return $output;
-// }
-
-
-
 
 if ( ! function_exists('uf_gallery') ) {
 	// Register Custom Post Type
