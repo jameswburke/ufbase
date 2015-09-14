@@ -175,7 +175,7 @@
 			foreach($attr as $key => $value){
 				$attribute_string .= $key.'='.'"'.$value.'"';
 			}
-			if(file_exists(get_stylesheet_directory_uri().'/assets/img/default_featured/'.$size.'.jpg')){
+			if(file_exists(get_stylesheet_directory().'/assets/img/default_featured/'.$size.'.jpg')){
 				echo '<img src="'.get_stylesheet_directory_uri().'/assets/img/default_featured/'.$size.'.jpg" '.$attribute_string.' />';
 			}else{
 				echo '<img src="'.get_template_directory_uri().'/assets/img/default_featured/'.$size.'.jpg" '.$attribute_string.' />';	
